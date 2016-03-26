@@ -11,7 +11,7 @@ import java.io.File;
  *
  *
  */
-public class CachePathUtil {
+public class CacheFileUtil {
 
 
     public static String getBasePackagePath(Context context) {
@@ -67,13 +67,42 @@ public class CachePathUtil {
 
 
     public static String getImageCachePath(Context context) {
-
         return getBaseCachePath(context) + "/images";
+    }
 
+    public static File getImageCacheDirectory(Context context){
+
+        return createDirectory(getImageCachePath(context));
     }
 
     public static String getCameraCachePath(Context context){
         return getBasePackagePath(context) + "/camera" ;
+    }
+
+    public static File getCameraCachePathDirectory(Context context){
+        return createDirectory(getCameraCachePath(context));
+    }
+
+    public static String getUpdateCachePath(Context context){
+        return getBasePackagePath(context) + "/update" ;
+    }
+
+    public static File getUpdateCacheDirectory(Context context){
+        return createDirectory(getUpdateCachePath(context)) ;
+    }
+
+    private static File createDirectory(String path){
+
+        File f = new File(path);
+
+        if(!f.exists()){
+            if(!f.mkdirs()){
+                return  null;
+            }
+        }
+
+        return f;
+
     }
 
 }

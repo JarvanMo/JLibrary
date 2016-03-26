@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dialog_fragment_divider">#CBCED2</color>
+    <color name="dialog_btn_text_color">#00796B</color>
+    <color name="black_212121">#212121</color>
+</resources>
