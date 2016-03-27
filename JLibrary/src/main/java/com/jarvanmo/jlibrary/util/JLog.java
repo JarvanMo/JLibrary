@@ -108,6 +108,18 @@ public class JLog {
     }
 
 
+    public static void e(String message){
+        e(getDefaultTag(),message);
+    }
+
+    public static void e(String tag,String message){
+        e(tag,message,null);
+    }
+
+    public static void e(String tag,String message , Throwable tr){
+        showLog(Log.ERROR,tag,getFunctionName() +  message + "\n" + getStackTraceString(tr));
+    }
+
     public static void d(String message){
         d(getDefaultTag(),message);
     }
@@ -119,6 +131,7 @@ public class JLog {
     public static void d(String tag,String message , Throwable tr){
         showLog(Log.DEBUG,tag,getFunctionName() +  message + "\n" + getStackTraceString(tr));
     }
+
 
     public static void w(String message){
         w(getDefaultTag(),message);

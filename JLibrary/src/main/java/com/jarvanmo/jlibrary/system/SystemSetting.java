@@ -21,6 +21,15 @@ public class SystemSetting {
     }
 
 
+    public final static  class CrashHandlerConfig{
+        private CrashHandlerConfig(){
+            throw new AssertionError("No instances.");
+        }
+
+        public static boolean isDefaultHandle = true;
+
+    }
+
 
 
 

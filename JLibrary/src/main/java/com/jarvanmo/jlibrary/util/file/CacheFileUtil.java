@@ -91,6 +91,15 @@ public class CacheFileUtil {
         return createDirectory(getUpdateCachePath(context)) ;
     }
 
+    public static String getCrashCachePath(Context context){
+        return getBasePackagePath(context) + "/crash" ;
+    }
+
+    public static File getCrashCacheDirectory(Context context){
+        return createDirectory(getCrashCachePath(context)) ;
+    }
+
+
     private static File createDirectory(String path){
 
         File f = new File(path);
