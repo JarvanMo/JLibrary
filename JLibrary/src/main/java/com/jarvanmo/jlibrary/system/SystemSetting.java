@@ -17,7 +17,7 @@ public class SystemSetting {
 
         public static String unknownTag = "JLog";
         public static boolean isLoggable = true;
-        public static int logLevel = Log.ASSERT;
+        public static int logLevel = Log.VERBOSE;
     }
 
 

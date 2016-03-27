@@ -129,7 +129,7 @@ public class JLog {
     }
 
     public static void w(String tag,String message , Throwable tr){
-        showLog(Log.VERBOSE,tag,getFunctionName() +  message + "\n" + getStackTraceString(tr));
+        showLog(Log.WARN,tag,getFunctionName() +  message + "\n" + getStackTraceString(tr));
     }
 
 
@@ -175,7 +175,7 @@ public class JLog {
 
 
     private static void  showLog(int priority, String tag , String message){
-        if(SystemSetting.JLogConfig.isLoggable && SystemSetting.JLogConfig.logLevel < priority){
+        if(SystemSetting.JLogConfig.isLoggable && SystemSetting.JLogConfig.logLevel <= priority){
             if(priority == Log.ASSERT){
                 Log.wtf(tag,message);
             }else {
