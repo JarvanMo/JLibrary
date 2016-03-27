@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 
 /**
  * Created by mo on 16-3-26.
- * <p/>
+ * <p>
  * a Log util
  */
 public class JLog {
@@ -82,86 +82,96 @@ public class JLog {
     }
 
 
-    public static void v(String message){
-        v(getDefaultTag(),message);
+    public static void v(String message) {
+        v(getDefaultTag(), message);
     }
 
-    public static void v(String tag,String message){
-        v(tag,message,null);
+    public static void v(String tag, String message) {
+        v(tag, message, null);
     }
 
-    public static void v(String tag,String message , Throwable tr){
-        showLog(Log.VERBOSE,tag,getFunctionName() + message + "\n" + getStackTraceString(tr));
-    }
-
-
-    public static void i(String message){
-        i(getDefaultTag(),message);
-    }
-
-    public static void i(String tag,String message){
-        i(tag,message,null);
-    }
-
-    public static void i(String tag,String message , Throwable tr){
-        showLog(Log.INFO,tag,getFunctionName() + message + "\n" + getStackTraceString(tr));
+    public static void v(String tag, String message, Throwable tr) {
+        showLog(Log.VERBOSE, tag, getFunctionName() + message + "\n" + getStackTraceString(tr));
     }
 
 
-    public static void e(String message){
-        e(getDefaultTag(),message);
+    public static void i(String message) {
+        i(getDefaultTag(), message);
     }
 
-    public static void e(String tag,String message){
-        e(tag,message,null);
+    public static void i(String tag, String message) {
+        i(tag, message, null);
     }
 
-    public static void e(String tag,String message , Throwable tr){
-        showLog(Log.ERROR,tag,getFunctionName() +  message + "\n" + getStackTraceString(tr));
-    }
-
-    public static void d(String message){
-        d(getDefaultTag(),message);
-    }
-
-    public static void d(String tag,String message){
-        d(tag,message,null);
-    }
-
-    public static void d(String tag,String message , Throwable tr){
-        showLog(Log.DEBUG,tag,getFunctionName() +  message + "\n" + getStackTraceString(tr));
+    public static void i(String tag, String message, Throwable tr) {
+        showLog(Log.INFO, tag, getFunctionName() + message + "\n" + getStackTraceString(tr));
     }
 
 
-    public static void w(String message){
-        w(getDefaultTag(),message);
+    public static void e(String message) {
+        e(getDefaultTag(), message);
+    }
+    public static void e(String tag, String message) {
+        e(tag, message, null);
+    }
+    public static void e(String message, Throwable tr) {
+        e(getDefaultTag(), message, tr);
+    }
+    public static void e(String tag, String message, Throwable tr) {
+        showLog(Log.ERROR, tag, getFunctionName() + message + "\n" + getStackTraceString(tr));
     }
 
-    public static void w(String tag,String message){
-        w(tag,message,null);
+
+    public static void d(String message) {
+        d(getDefaultTag(), message);
     }
 
-    public static void w(String tag,String message , Throwable tr){
-        showLog(Log.WARN,tag,getFunctionName() +  message + "\n" + getStackTraceString(tr));
+    public static void d(String tag, String message) {
+        d(tag, message, null);
+    }
+
+    public static void d(String message, Throwable tr) {
+        d(getDefaultTag(), message, tr);
+    }
+
+    public static void d(String tag, String message, Throwable tr) {
+        showLog(Log.DEBUG, tag, getFunctionName() + message + "\n" + getStackTraceString(tr));
     }
 
 
-    public static void wtf(String message){
-        wtf(getDefaultTag(),message);
+    public static void w(String message) {
+        w(getDefaultTag(), message);
     }
 
-    public static void wtf(String tag,String message){
-        wtf(tag,message,null);
+    public static void w(String tag, String message) {
+        w(tag, message, null);
+    }
+    public static void w(String message,Throwable tr) {
+        w(getDefaultTag(), message, null);
+    }
+    public static void w(String tag, String message, Throwable tr) {
+        showLog(Log.WARN, tag, getFunctionName() + message + "\n" + getStackTraceString(tr));
     }
 
-    public static void wtf(String tag,String message , Throwable tr){
-        showLog(Log.ASSERT,tag,getFunctionName() +  message + "\n" + getStackTraceString(tr));
+
+    public static void wtf(String message) {
+        wtf(getDefaultTag(), message);
     }
 
+    public static void wtf(String tag, String message) {
+        wtf(tag, message, null);
+    }
+    public static void wtf(String message, Throwable tr) {
+        wtf(getDefaultTag(), message, null);
+    }
+    public static void wtf(String tag, String message, Throwable tr) {
+        showLog(Log.ASSERT, tag, getFunctionName() + message + "\n" + getStackTraceString(tr));
+    }
 
 
     /**
      * Handy function to get a loggable stack trace from a Throwable
+     *
      * @param tr An exception to log
      */
     private static String getStackTraceString(Throwable tr) {
@@ -187,11 +197,11 @@ public class JLog {
     }
 
 
-    private static void  showLog(int priority, String tag , String message){
-        if(SystemSetting.JLogConfig.isLoggable && SystemSetting.JLogConfig.logLevel <= priority){
-            if(priority == Log.ASSERT){
-                Log.wtf(tag,message);
-            }else {
+    private static void showLog(int priority, String tag, String message) {
+        if (SystemSetting.JLogConfig.isLoggable && SystemSetting.JLogConfig.logLevel <= priority) {
+            if (priority == Log.ASSERT) {
+                Log.wtf(tag, message);
+            } else {
                 Log.println(priority, tag, message);
             }
         }
