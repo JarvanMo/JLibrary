@@ -147,7 +147,7 @@ public class JLog {
         w(tag, message, null);
     }
     public static void w(String message,Throwable tr) {
-        w(getDefaultTag(), message, null);
+        w(getDefaultTag(), message, tr);
     }
     public static void w(String tag, String message, Throwable tr) {
         showLog(Log.WARN, tag, getFunctionName() + message + "\n" + getStackTraceString(tr));
@@ -162,7 +162,7 @@ public class JLog {
         wtf(tag, message, null);
     }
     public static void wtf(String message, Throwable tr) {
-        wtf(getDefaultTag(), message, null);
+        wtf(getDefaultTag(), message, tr);
     }
     public static void wtf(String tag, String message, Throwable tr) {
         showLog(Log.ASSERT, tag, getFunctionName() + message + "\n" + getStackTraceString(tr));
