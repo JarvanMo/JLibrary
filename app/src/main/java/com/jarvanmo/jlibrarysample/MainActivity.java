@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.jarvanmo.jlibrary.base.BaseActivity;
+import com.jarvanmo.jlibrary.base.context.BaseActivity;
 import com.jarvanmo.jlibrary.util.JLog;
 import com.jarvanmo.jlibrary.widget.dialog.DialogFragmentListener;
 import com.jarvanmo.jlibrary.widget.dialog.SimpleAlertDialog;

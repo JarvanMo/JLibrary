@@ -4,10 +4,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.jarvanmo.jlibrary.base.BaseActivity;
+import com.jarvanmo.jlibrary.base.context.BaseActivity;
 import com.jarvanmo.jlibrarysample.R;
 import com.jarvanmo.jlibrarysample.databinding.ActivityTestBinding;
 import com.jarvanmo.jlibrarysample.model.TestModel;
@@ -36,7 +35,7 @@ public class TestActivity extends BaseActivity {
             data.add(testModel);
         }
 
-        adapter = new TestAdapter(this,data,R.layout.item_test_rv,TestHolder.class);
+        adapter = new TestAdapter(this,data);
         dataBinding.testRv.setLayoutManager(new LinearLayoutManager(this));
         dataBinding.testRv.setAdapter(adapter);
 

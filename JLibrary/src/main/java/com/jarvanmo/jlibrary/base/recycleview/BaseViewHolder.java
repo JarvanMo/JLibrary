@@ -1,4 +1,4 @@
-package com.jarvanmo.jlibrary.base;
+package com.jarvanmo.jlibrary.base.recycleview;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;

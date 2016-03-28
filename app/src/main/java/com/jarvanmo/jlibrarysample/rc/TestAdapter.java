@@ -1,9 +1,12 @@
 package com.jarvanmo.jlibrarysample.rc;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
+import android.view.View;
 
-import com.jarvanmo.jlibrary.base.RecycleViewAdapter;
+import com.jarvanmo.jlibrary.base.recycleview.RecycleViewAdapter;
+import com.jarvanmo.jlibrary.widget.toast.JToast;
+import com.jarvanmo.jlibrarysample.R;
+import com.jarvanmo.jlibrarysample.databinding.ItemTestRvBinding;
 import com.jarvanmo.jlibrarysample.model.TestModel;
 
 import java.util.List;
@@ -13,24 +16,38 @@ import java.util.List;
  *
  */
 public class TestAdapter extends  RecycleViewAdapter<TestModel, TestHolder>{
-    public TestAdapter(Context context, List<TestModel> data, @LayoutRes int layoutResId, Class<TestHolder> clazz) {
-        super(context, data, layoutResId, clazz);
+
+
+    public TestAdapter(Context context, List<TestModel> data) {
+        super(context, data);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.item_test_rv;
     }
 
 
     @Override
-    public void onControlView(TestHolder holder, int position) {
-//        ItemTestRvBinding binding = holder.getBinding();
-//        TestModel model = getItem(position);
-//        //because TestModel extends BaseObservable　，so we can do this directly
-//        binding.setTestModel(model);
-
-        //or we can do
-//        binding.setVariable(BR.testModel,model);
-//        holder.getBinding().executePendingBindings();//立即更新UI
-
-//        final TestHolder item = mItems.get(position);
-//        holder.getBinding().setVariable(BR.item, item);
-//        holder.getBinding().executePendingBindings();
+    public Class<TestHolder> getViewHolderType() {
+        return TestHolder.class;
     }
+
+    @Override
+    public void onControlView(TestHolder holder, int position) {
+        ItemTestRvBinding binding = holder.getBinding();
+        final TestModel testModel = getItem(position);
+        binding.testNameTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testModel.setUserName("hello->" + System.currentTimeMillis());
+                notifyDataSetChanged();
+
+            }
+        });
+
+    }
+
+
+
 }

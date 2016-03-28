@@ -1,4 +1,4 @@
-package com.jarvanmo.jlibrary.base;
+package com.jarvanmo.jlibrary.base.recycleview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -17,26 +17,30 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecycleViewAdapter<E, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
 
     private List<E> data;
 
 
     private Context mContext;
 
-    private int layoutResId;
+    Constructor<VH> constructor = null;
 
-    private Class<VH> clazz;
-
-    public RecycleViewAdapter(Context context, List<E> data, @LayoutRes int layoutResId, Class<VH> clazz) {
+    public RecycleViewAdapter(Context context, List<E> data) {
         this.mContext = context;
-        this.layoutResId = layoutResId;
         if (data == null) {
             data = new ArrayList<>();
         }
-
         this.data = data;
-        this.clazz = clazz;
+        Class<VH> clazz = getViewHolderType();
+
+        try {
+            constructor = clazz.getDeclaredConstructor(View.class);
+            constructor.setAccessible(true);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -182,7 +186,9 @@ public class RecycleViewAdapter<E, VH extends BaseViewHolder> extends RecyclerVi
             data.clear();
             notifyDataSetChanged();
         }
+
     }
+
 
     @Override
     public long getItemId(int position) {
@@ -195,18 +201,13 @@ public class RecycleViewAdapter<E, VH extends BaseViewHolder> extends RecyclerVi
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         VH vh = null;
 
-//        View view = inflater.inflate(layoutResId, parent, false);
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), getLayoutId(), parent, false);
 
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), layoutResId, parent, false);
         try {
-            Constructor<VH> constructor;
-            constructor = clazz.getDeclaredConstructor(View.class);
-            constructor.setAccessible(true);
             vh = constructor.newInstance(binding.getRoot());
             constructor.setAccessible(false);
             vh.setBinding(binding);
-//            RecycleViewViewHolderBuilder.with(context).load(view).into(vh);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return vh;
@@ -235,9 +236,12 @@ public class RecycleViewAdapter<E, VH extends BaseViewHolder> extends RecyclerVi
         onControlView(holder, position);
     }
 
-    public void onControlView(VH holder, int position) {
+    public abstract void onControlView(VH holder, int position);
 
-    }
+
+    public  @LayoutRes  abstract int getLayoutId();
+
+    public abstract Class<VH> getViewHolderType();
 
 
 }

@@ -2,7 +2,7 @@ package com.jarvanmo.jlibrarysample.rc;
 
 import android.view.View;
 
-import com.jarvanmo.jlibrary.base.BaseViewHolder;
+import com.jarvanmo.jlibrary.base.recycleview.BaseViewHolder;
 import com.jarvanmo.jlibrarysample.databinding.ItemTestRvBinding;
 
 /**

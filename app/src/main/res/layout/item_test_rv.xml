@@ -3,7 +3,6 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="testModel"
             type="com.jarvanmo.jlibrarysample.model.TestModel" />
@@ -17,14 +16,14 @@
         <TextView
             android:id="@+id/test_name_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@android:color/holo_blue_bright"
             android:text="@{testModel.userName}"
             />
         <TextView
             android:id="@+id/test_sex_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:background="@android:color/holo_green_light"
             android:text="@{testModel.sex}"
             />

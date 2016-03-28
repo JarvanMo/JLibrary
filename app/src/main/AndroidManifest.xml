@@ -3,7 +3,7 @@
     package="com.jarvanmo.jlibrarysample">
 
     <application
-        android:name="com.jarvanmo.jlibrary.base.BaseApplication"
+        android:name="com.jarvanmo.jlibrary.base.context.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
