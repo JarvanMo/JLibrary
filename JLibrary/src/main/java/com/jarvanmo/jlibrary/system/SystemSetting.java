@@ -38,6 +38,9 @@ public final class SystemSetting {
 
 
     public final static class  SystemExitConfig{
+        private SystemExitConfig(){
+            throw new AssertionError("No instances.");
+        }
 
         public static Set<String> exitNames = new HashSet<>();
         public static String defaultExitName = "MainActivity";
@@ -46,6 +49,14 @@ public final class SystemSetting {
 
     }
 
+
+    public final static class  ResourceConfig{
+        private ResourceConfig(){
+            throw new AssertionError("No instances.");
+        }
+
+        public static boolean isAppFontSizeControlledByOs = false;
+    }
 
 
 

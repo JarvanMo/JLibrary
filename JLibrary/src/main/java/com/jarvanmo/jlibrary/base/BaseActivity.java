@@ -1,18 +1,17 @@
 package com.jarvanmo.jlibrary.base;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 import com.jarvanmo.jlibrary.system.SystemManager;
-import com.jarvanmo.jlibrary.widget.dialog.SimpleAlertDialog;
+import com.jarvanmo.jlibrary.system.SystemSetting;
 import com.jarvanmo.jlibrary.widget.toast.JToast;
 
 /**
@@ -70,5 +69,20 @@ public class BaseActivity extends AppCompatActivity {
             manager.finishCurrActivity(this);
         }
         return false;
+    }
+
+    @Override
+    public Resources getResources() {
+        if(!SystemSetting.ResourceConfig.isAppFontSizeControlledByOs) {
+            return super.getResources();
+        }else {
+
+            Resources resources = super.getResources();
+            Configuration configuration = new Configuration();
+            configuration.setToDefaults();
+            resources.updateConfiguration(configuration,resources.getDisplayMetrics());
+
+            return  resources;
+        }
     }
 }
