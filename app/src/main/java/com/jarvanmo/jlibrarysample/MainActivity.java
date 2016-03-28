@@ -10,6 +10,7 @@ import com.jarvanmo.jlibrary.util.JLog;
 import com.jarvanmo.jlibrary.widget.dialog.DialogFragmentListener;
 import com.jarvanmo.jlibrary.widget.dialog.SimpleAlertDialog;
 import com.jarvanmo.jlibrary.widget.toast.JToast;
+import com.jarvanmo.jlibrarysample.rc.TestActivity;
 
 public class MainActivity extends BaseActivity implements DialogFragmentListener{
 
