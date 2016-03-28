@@ -1,7 +1,5 @@
 package com.jarvanmo.jlibrary.util;
 
-import android.text.TextUtils;
-
 public final class Strings {
   private Strings() {
     // No instances.

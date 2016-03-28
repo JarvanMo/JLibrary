@@ -9,9 +9,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jarvanmo.jlibrarysample.MainActivity">
 
-    <TextView
-        android:id="@+id/hello_world_tv"
+    <Button
+        android:id="@+id/jtoast_one_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="JToastOne" />
+
+    <Button
+        android:id="@+id/jtoast_two_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/jtoast_one_btn"
+        android:text="JToastTwo" />
+    <Button
+        android:id="@+id/simple_dialog_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/jtoast_two_btn"
+        android:text="SimpleDialog" />
 </RelativeLayout>

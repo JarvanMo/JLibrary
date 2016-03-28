@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
  * <p>
  * a Log util
  */
-public class JLog {
+public final class JLog {
 
 
     private JLog() {

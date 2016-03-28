@@ -6,7 +6,7 @@ import android.util.Log;
  * Created by mo on 16-3-26.
  *
  */
-public class SystemSetting {
+public final class SystemSetting {
 
 
     public final static class JLogConfig{
