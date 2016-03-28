@@ -18,8 +18,8 @@ import java.util.List;
 public class TestAdapter extends  RecycleViewAdapter<TestModel, TestHolder>{
 
 
-    public TestAdapter(Context context, List<TestModel> data) {
-        super(context, data);
+    public TestAdapter(Context context) {
+        super(context);
     }
 
     @Override

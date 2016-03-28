@@ -28,14 +28,20 @@ public class TestActivity extends BaseActivity {
         ActivityTestBinding dataBinding =  DataBindingUtil.setContentView(this, R.layout.activity_test);
 
 
-        for(int i = 0 ; i < 20 ;i++){
+        for(int i = 0 ; i < 10 ;i++){
             TestModel testModel = new TestModel();
-            testModel.setUserName(System.currentTimeMillis()+"");
-            testModel.setSex("男");
+            testModel.setUserName("name:" + (10 - i));
+            if(i%2 == 0){
+                testModel.setSex("男");
+            }else {
+                testModel.setSex("女");
+            }
+
             data.add(testModel);
         }
 
-        adapter = new TestAdapter(this,data);
+        adapter = new TestAdapter(this);
+        adapter.addAll(data);
         dataBinding.testRv.setLayoutManager(new LinearLayoutManager(this));
         dataBinding.testRv.setAdapter(adapter);
 
@@ -43,13 +49,36 @@ public class TestActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                for(int i = 0 ; i < 20 ;i++){
+                for(int i = 0 ; i < 5 ;i++){
                     TestModel testModel = new TestModel();
-                    testModel.setUserName(System.currentTimeMillis()+"");
-                    testModel.setSex("女");
+                    testModel.setUserName("test "+ i +" p");
+                    if(i%2 == 0){
+                        testModel.setSex("f女");
+                    }else {
+                        testModel.setSex("m男");
+                    }
                     adapter.add(testModel);
                 }
             }
         },1000);
+
+        final List<TestModel> data1 = new ArrayList<>();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = 0 ; i < 5 ;i++){
+                    TestModel testModel = new TestModel();
+                    testModel.setUserName("No." + i);
+                    if(i%2 == 0){
+                        testModel.setSex("f");
+                    }else {
+                        testModel.setSex("m");
+                    }
+                    data1.add(testModel);
+                }
+
+                adapter.addAll(data1);
+            }
+        },1500);
     }
 }

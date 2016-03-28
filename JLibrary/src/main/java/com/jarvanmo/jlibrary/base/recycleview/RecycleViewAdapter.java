@@ -26,14 +26,11 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
 
     Constructor<VH> constructor = null;
 
-    public RecycleViewAdapter(Context context, List<E> data) {
+    public RecycleViewAdapter(Context context) {
         this.mContext = context;
-        if (data == null) {
-            data = new ArrayList<>();
-        }
-        this.data = data;
-        Class<VH> clazz = getViewHolderType();
+        data = new ArrayList<>();
 
+        Class<VH> clazz = getViewHolderType();
         try {
             constructor = clazz.getDeclaredConstructor(View.class);
             constructor.setAccessible(true);
@@ -93,13 +90,9 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
     /**
      * reset the data used by adapter
      */
-    public void setData(List<E> data) {
-        if (data == null) {
-            data = new ArrayList<>();
-        }
-
-        this.data = data;
-        notifyDataSetChanged();
+    public void setData(List<E> newData) {
+        data.clear();
+        addAll(newData);
     }
 
     /**
@@ -239,7 +232,9 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
     public abstract void onControlView(VH holder, int position);
 
 
-    public  @LayoutRes  abstract int getLayoutId();
+    public
+    @LayoutRes
+    abstract int getLayoutId();
 
     public abstract Class<VH> getViewHolderType();
 
