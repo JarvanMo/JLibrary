@@ -28,7 +28,7 @@ public class RecycleViewAdapter<E, VH extends BaseViewHolder> extends RecyclerVi
 
     private Class<VH> clazz;
 
-    private RecycleViewAdapter(Context context, List<E> data, @LayoutRes int layoutResId, Class<VH> clazz) {
+    public RecycleViewAdapter(Context context, List<E> data, @LayoutRes int layoutResId, Class<VH> clazz) {
         this.mContext = context;
         this.layoutResId = layoutResId;
         if (data == null) {
@@ -239,46 +239,5 @@ public class RecycleViewAdapter<E, VH extends BaseViewHolder> extends RecyclerVi
 
     }
 
-
-    public static class Builder<M> {
-
-        private Context context;
-        private List<M> data;
-        private int layoutId;
-        private Class clazz;
-
-        public Builder(Context context) {
-            this.context = context;
-        }
-
-
-        public Builder setData(List<M> data) {
-            this.data = data;
-            return this;
-        }
-
-        public Builder setLayout(@LayoutRes int layoutId) {
-
-            this.layoutId = layoutId;
-
-            return this;
-        }
-
-
-        public Builder setHolder(Class<?> clazz){
-            this.clazz = clazz;
-            return this;
-        }
-
-        public RecycleViewAdapter create() {
-
-            final RecycleViewAdapter recycleViewAdapter = new RecycleViewAdapter(context,data,layoutId,clazz);
-
-
-            return recycleViewAdapter;
-
-        }
-
-    }
 
 }

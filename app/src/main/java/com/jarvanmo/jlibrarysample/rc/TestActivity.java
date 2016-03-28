@@ -28,7 +28,6 @@ public class TestActivity extends BaseActivity {
 
         ActivityTestBinding dataBinding =  DataBindingUtil.setContentView(this, R.layout.activity_test);
 
-      AlertDialog.Builder
 
         for(int i = 0 ; i < 20 ;i++){
             TestModel testModel = new TestModel();
