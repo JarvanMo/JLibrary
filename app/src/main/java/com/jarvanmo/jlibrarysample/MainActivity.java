@@ -1,17 +1,19 @@
 package com.jarvanmo.jlibrarysample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.jarvanmo.jlibrary.base.BaseActivity;
 import com.jarvanmo.jlibrary.util.JLog;
 import com.jarvanmo.jlibrary.widget.dialog.DialogFragmentListener;
 import com.jarvanmo.jlibrary.widget.dialog.SimpleAlertDialog;
 import com.jarvanmo.jlibrary.widget.toast.JToast;
 
-public class MainActivity extends AppCompatActivity implements DialogFragmentListener{
+public class MainActivity extends BaseActivity implements DialogFragmentListener{
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements DialogFragmentLis
             @Override
             public void onClick(View v) {
 
-                JToast.showToast(R.string.jtoast_one);
+                showToast(R.string.jtoast_one);
 
                 JLog.w("warn");
             }
@@ -50,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements DialogFragmentLis
                 SimpleAlertDialog.with(MainActivity.this).title(R.string.update_title) //
                         .message("test").positiveText(R.string.default_positive_text).//
                         negativeText(R.string.default_negative_text).listen(MainActivity.this).show();
+            }
+        });
+
+        findViewById(R.id.jump_to_test_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityOrService(TestActivity.class);
             }
         });
     }

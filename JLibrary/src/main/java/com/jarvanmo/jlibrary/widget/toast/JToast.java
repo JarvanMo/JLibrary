@@ -18,11 +18,12 @@ public final class JToast {
     private static long twoTime = 0;
 
     private static String oldMessage = "";
+
     /***
      * Must call this method before use JToast
      * usually, we init JToast in our application
-     * **/
-    public static void init(Context context){
+     **/
+    public static void init(Context context) {
         mContext = context;
     }
 
@@ -30,20 +31,20 @@ public final class JToast {
     /***
      * Usually , you'd better  call　 {@link #showToast(int)}　instead,
      * because we need internationalization sometimes.
-     * **/
-    public static void showToast(@NonNull String message){
+     **/
+    public static void showToast(@NonNull String message) {
 
-        if(mToast == null){
-            mToast = Toast.makeText(mContext,message,Toast.LENGTH_SHORT);
+        if (mToast == null) {
+            mToast = Toast.makeText(mContext, message, Toast.LENGTH_SHORT);
             mToast.show();
             oneTime = System.currentTimeMillis();
-        }else {
+        } else {
             twoTime = System.currentTimeMillis();
-            if(oldMessage.equals(message)){
-               if(twoTime - oneTime > Toast.LENGTH_SHORT){
-                   mToast.show();
-               }
-            }else {
+            if (oldMessage.equals(message)) {
+                if (twoTime - oneTime > Toast.LENGTH_SHORT) {
+                    mToast.show();
+                }
+            } else {
                 oldMessage = message;
                 mToast.setText(oldMessage);
                 mToast.show();
@@ -53,8 +54,21 @@ public final class JToast {
         oneTime = twoTime;
     }
 
-    public static void showToast(@StringRes int messageId){
+    public static void showToast(@StringRes int messageId) {
         showToast(mContext.getString(messageId));
+    }
+
+
+    /**
+     * Close the view if it's showing, or don't show it if it isn't showing yet.
+     * You do not normally have to call this.  Normally view will disappear on its own
+     * after the appropriate duration.
+     */
+    public static void cancel() {
+        if (mToast != null) {
+            mToast.cancel();
+        }
+
     }
 
 }

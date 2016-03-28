@@ -2,6 +2,8 @@ package com.jarvanmo.jlibrary.base;
 
 import android.app.Application;
 
+import com.jarvanmo.jlibrary.system.SystemManager;
+import com.jarvanmo.jlibrary.system.SystemSetting;
 import com.jarvanmo.jlibrary.widget.toast.JToast;
 
 /**
@@ -14,5 +16,7 @@ public class BaseApplication  extends Application {
     public void onCreate() {
         super.onCreate();
         JToast.init(this);
+        SystemManager.getInstance();
+        SystemSetting.SystemExitConfig.exitNames.add(SystemSetting.SystemExitConfig.defaultExitName);
     }
 }

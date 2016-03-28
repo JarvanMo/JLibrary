@@ -2,6 +2,11 @@ package com.jarvanmo.jlibrary.system;
 
 import android.util.Log;
 
+import com.jarvanmo.jlibrary.R;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by mo on 16-3-26.
  *
@@ -32,6 +37,14 @@ public final class SystemSetting {
 
 
 
+    public final static class  SystemExitConfig{
+
+        public static Set<String> exitNames = new HashSet<>();
+        public static String defaultExitName = "MainActivity";
+        public static int exitNotice = R.string.system_exit_notice;
+        public static Set<Runnable> doTheseBeforeExit = new HashSet<>();
+
+    }
 
 
 

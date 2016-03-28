@@ -13,4 +13,6 @@
     <string name="download_success">下载完成，点击安装</string>
     <string name="download_begin">开始下载</string>
     <string name="download_done">下载完成</string>
+
+    <string name="system_exit_notice">再次点击将退出程序</string>
 </resources>

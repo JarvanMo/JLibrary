@@ -11,6 +11,9 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+/***
+ * Thanks to imknown!
+ * *****/
 public class WebViewHelper {
 
     public static void configWebView(WebView wb, Context context) {

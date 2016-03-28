@@ -27,4 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/jtoast_two_btn"
         android:text="SimpleDialog" />
+    <Button
+        android:id="@+id/jump_to_test_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/simple_dialog_btn"
+        android:text="Jump" />
 </RelativeLayout>
