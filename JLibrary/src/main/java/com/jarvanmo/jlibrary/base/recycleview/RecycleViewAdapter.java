@@ -14,23 +14,36 @@ import android.view.ViewGroup;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Created by mo on 16-3-28.
+ * My goal is to make creating adapter  easier.
+ *So,this adapter is based on {@link DataBindingUtil} and reflection.
+ * I never test performance of this adapter
+ * if you really concern about performance, you'd better not use this adapter.
+ *
+ */
+public abstract class RecycleViewAdapter<B extends ViewDataBinding, M, VH extends BaseViewHolder<B>> extends RecyclerView.Adapter<VH> {
 
-public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
-
-    private List<E> data;
+    private List<M> data;
 
 
     private Context mContext;
 
     Constructor<VH> constructor = null;
 
+    @SuppressWarnings("unchecked")
     public RecycleViewAdapter(Context context) {
         this.mContext = context;
         data = new ArrayList<>();
 
-        Class<VH> clazz = getViewHolderType();
+//        Class<VH> clazz = getViewHolderType();
+        Type genType = getClass().getGenericSuperclass();
+        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+        Class<VH> clazz  = (Class) params[2];
         try {
             constructor = clazz.getDeclaredConstructor(View.class);
             constructor.setAccessible(true);
@@ -49,7 +62,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
         }
     }
 
-    public E getItem(int position) {
+    public M getItem(int position) {
         if (position < data.size()) {
             return data.get(position);
         } else {
@@ -61,7 +74,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
         return mContext;
     }
 
-    public List<E> getData() {
+    public List<M> getData() {
         return data;
     }
 
@@ -71,9 +84,9 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
      * if the size of data is 0 or data is null
      * it will return null
      **/
-    public E getLastItem() {
+    public M getLastItem() {
 
-        E result = null;
+        M result = null;
         if (data != null) {
             int size = data.size();
 
@@ -90,7 +103,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
     /**
      * reset the data used by adapter
      */
-    public void setData(List<E> newData) {
+    public void setData(List<M> newData) {
         data.clear();
         addAll(newData);
     }
@@ -100,7 +113,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
      *
      * @param item a piece of data
      */
-    public void addItem(E item) {
+    public void addItem(M item) {
 
         if (data != null) {
             data.add(item);
@@ -113,7 +126,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
      *
      * @param moreData the data need to show together
      */
-    public void addAll(List<E> moreData) {
+    public void addAll(List<M> moreData) {
 
         if (data != null) {
             data.addAll(moreData);
@@ -124,7 +137,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
     /**
      * add a item to the data at index
      **/
-    public void add(int position, E item) {
+    public void add(int position, M item) {
 
         if (data != null) {
             data.add(position, item);
@@ -132,7 +145,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
         }
     }
 
-    public void add(E item) {
+    public void add(M item) {
         if (data != null) {
             data.add(item);
             notifyDataSetChanged();
@@ -143,11 +156,11 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
     /**
      * add a item to the data at the first position
      **/
-    public void addToFirst(E item) {
+    public void addToFirst(M item) {
         add(0, item);
     }
 
-    public void set(int position, E item) {
+    public void set(int position, M item) {
 
         if (data != null) {
             data.set(position, item);
@@ -166,7 +179,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
         }
     }
 
-    public void removeItem(E item) {
+    public void removeItem(M item) {
 
         if (data.contains(item)) {
             data.remove(item);
@@ -194,7 +207,7 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         VH vh = null;
 
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), getLayoutId(), parent, false);
+        B binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), getLayoutId(), parent, false);
 
         try {
             vh = constructor.newInstance(binding.getRoot());
@@ -213,8 +226,8 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
     public void onBindViewHolder(VH holder, int position) {
 
 
-        ViewDataBinding binding = holder.getBinding();
-        E item = getItem(position);
+        B binding = holder.getBinding();
+        M item = getItem(position);
         try {
             Method method = binding.getClass().getMethod("set" + item.getClass().getSimpleName(), item.getClass());
             method.invoke(binding, item);
@@ -226,17 +239,16 @@ public abstract class RecycleViewAdapter<E, VH extends BaseViewHolder> extends R
 //        binding.setTestModel(model);
 
 
-        onControlView(holder, position);
+        onControlView( item ,binding,holder, position);
     }
 
-    public abstract void onControlView(VH holder, int position);
+    public abstract void onControlView(M item , B binding, VH holder,  int position );
 
 
     public
     @LayoutRes
     abstract int getLayoutId();
 
-    public abstract Class<VH> getViewHolderType();
 
 
 }

@@ -45,40 +45,40 @@ public class TestActivity extends BaseActivity {
         dataBinding.testRv.setLayoutManager(new LinearLayoutManager(this));
         dataBinding.testRv.setAdapter(adapter);
 
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for(int i = 0 ; i < 5 ;i++){
-                    TestModel testModel = new TestModel();
-                    testModel.setUserName("test "+ i +" p");
-                    if(i%2 == 0){
-                        testModel.setSex("f女");
-                    }else {
-                        testModel.setSex("m男");
-                    }
-                    adapter.add(testModel);
-                }
-            }
-        },1000);
-
-        final List<TestModel> data1 = new ArrayList<>();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for(int i = 0 ; i < 5 ;i++){
-                    TestModel testModel = new TestModel();
-                    testModel.setUserName("No." + i);
-                    if(i%2 == 0){
-                        testModel.setSex("f");
-                    }else {
-                        testModel.setSex("m");
-                    }
-                    data1.add(testModel);
-                }
-
-                adapter.addAll(data1);
-            }
-        },1500);
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                for(int i = 0 ; i < 5 ;i++){
+//                    TestModel testModel = new TestModel();
+//                    testModel.setUserName("test "+ i +" p");
+//                    if(i%2 == 0){
+//                        testModel.setSex("f女");
+//                    }else {
+//                        testModel.setSex("m男");
+//                    }
+//                    adapter.add(testModel);
+//                }
+//            }
+//        },1000);
+//
+//        final List<TestModel> data1 = new ArrayList<>();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                for(int i = 0 ; i < 5 ;i++){
+//                    TestModel testModel = new TestModel();
+//                    testModel.setUserName("No." + i);
+//                    if(i%2 == 0){
+//                        testModel.setSex("f");
+//                    }else {
+//                        testModel.setSex("m");
+//                    }
+//                    data1.add(testModel);
+//                }
+//
+//                adapter.addAll(data1);
+//            }
+//        },1500);
     }
 }

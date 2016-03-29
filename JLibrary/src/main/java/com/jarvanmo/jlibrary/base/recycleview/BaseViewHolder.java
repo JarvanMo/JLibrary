@@ -1,21 +1,20 @@
 package com.jarvanmo.jlibrary.base.recycleview;
 
-import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
  * Created by mo on 16-3-28.
- *
+ *How to make it user?
+ * I suppose if i don't want to do anything in my holder,
+ * how to use BaseViewHolder directly?
  */
 public class BaseViewHolder<B extends  ViewDataBinding>  extends RecyclerView.ViewHolder{
 
-    private View itemView;
     private B mBinding ;
     public BaseViewHolder(View itemView) {
         super(itemView);
-        this.itemView = itemView;
     }
 
     public B getBinding(){
@@ -24,4 +23,5 @@ public class BaseViewHolder<B extends  ViewDataBinding>  extends RecyclerView.Vi
     public void setBinding(B binding){
         mBinding = binding;
     }
+
 }
