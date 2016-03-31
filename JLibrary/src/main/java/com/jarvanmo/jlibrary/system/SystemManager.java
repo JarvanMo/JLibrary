@@ -16,7 +16,7 @@ public class SystemManager {
 
     private List<Activity> mList = new LinkedList<>();
     // 为了实现每次使用该类时不创建新的对象而创建的静态对象
-    private static SystemManager instance;
+    private static volatile SystemManager instance;
 
 
     // 构造方法
@@ -26,10 +26,19 @@ public class SystemManager {
 
     // 实例化一次
     public synchronized static SystemManager getInstance() {
-        if (null == instance) {
-            instance = new SystemManager();
+        SystemManager inst = instance;
+
+        if(inst == null){
+            synchronized (SystemManager.class){
+                inst = instance;
+                if(inst == null){
+                    inst = new SystemManager();
+                    instance = inst;
+                }
+            }
+
         }
-        return instance;
+        return inst;
     }
 
     // add Activity

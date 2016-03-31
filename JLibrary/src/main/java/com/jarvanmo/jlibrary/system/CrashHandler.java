@@ -29,13 +29,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 	private Thread.UncaughtExceptionHandler mDefaultHandler;
 
 	/** CrashHandler实例 */
-	private static CrashHandler INSTANCE = new CrashHandler();
+	private volatile  static CrashHandler INSTANCE = null;
 
 	/** 程序的Context对象 */
 	private Context mContext;
 
 	/** 用来存储设备信息和异常信息 */
-	private Map<String, String> crashInfo = new HashMap<String, String>();
+	private Map<String, String> crashInfo = new HashMap<>();
 
 	private Handler mHandler ;
 
@@ -52,7 +52,18 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
 	/** 获取CrashHandler实例 ,单例模式 */
 	public static CrashHandler getInstance() {
-		return INSTANCE;
+		CrashHandler temp = INSTANCE;
+
+		if(temp == null){
+			synchronized (CrashHandler.class){
+				temp = INSTANCE;
+				if(temp == null){
+					temp = new CrashHandler();
+					INSTANCE = temp;
+				}
+			}
+		}
+		return temp;
 	}
 
 	/**
